@@ -2,47 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ALAMKOOO!!!</title>
+  <title>CRUSH MO BA'KO?</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial Black', sans-serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      flex-direction: column;
+      text-align: center;
     }
 
     #mainContent {
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: 0.3s ease;
+    }
+
+    #question {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.2);
     }
 
     img {
-      max-width: 300px;
+      width: 300px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
 
-    .buttons {
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 12px 24px;
-      margin: 0 10px;
-      font-size: 18px;
-      font-weight: bold;
+    .buttons button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
+      font-weight: bold;
+      transition: transform 0.2s ease;
     }
 
     .yes {
@@ -56,67 +61,86 @@
     }
 
     .maybe {
-      background-color: gold;
+      background-color: yellow;
       color: black;
     }
 
     #videoContainer {
       display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: rgba(0,0,0,0.95);
-      width: 100%;
-      height: 100%;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 999;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 10;
     }
 
     #alamkoo {
       font-size: 40px;
+      color: red;
       font-weight: bold;
-      color: #ff3c3c;
       margin-bottom: 20px;
     }
 
     iframe {
-      border-radius: 12px;
+      width: 80%;
+      height: 400px;
+      border-radius: 15px;
+    }
+
+    .shake {
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
     }
   </style>
 </head>
 <body>
 
   <div id="mainContent">
-    <img src="https://chat.openai.com/share/preview/e6b83261-c178-4cd2-8a35-85d91b0aa206/photo.jpg" alt="Funny Face" />
+    <div id="question">CRUSH MO BA'KO?</div>
+
+    <img src="https://drive.google.com/uc?export=view&id=1Y8xbZk05gNJ2EklOrF4R1FnvG8atRnsq" alt="Funny face">
     
     <div class="buttons">
       <button class="yes" onclick="showVideo()">YES</button>
-      <button class="no" onclick="hideMain()">NO</button>
-      <button class="maybe" onclick="hideMain()">MAYBE</button>
+      <button class="no" onclick="shake()">NO</button>
+      <button class="maybe" onclick="shake()">MAYBE</button>
     </div>
   </div>
 
   <div id="videoContainer">
     <div id="alamkoo">ALAMKOOO!!!</div>
-    <iframe
-      width="80%"
-      height="400"
-      src="https://streamable.com/e/tqjww6?autoplay=1"
-      frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
+    <iframe 
+      src="https://streamable.com/e/tqjww6?autoplay=1" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
   </div>
 
   <script>
     function showVideo() {
+      document.getElementById("mainContent").style.display = "none";
       document.getElementById("videoContainer").style.display = "flex";
     }
 
-    function hideMain() {
-      document.getElementById("mainContent").style.display = "none";
+    function shake() {
+      const main = document.getElementById("mainContent");
+      main.classList.add("shake");
+      setTimeout(() => {
+        main.classList.remove("shake");
+      }, 400);
     }
   </script>
 
