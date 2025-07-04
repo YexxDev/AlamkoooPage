@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ALAMKOOO!!!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #mainContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    img {
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 0 10px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background-color: green;
+      color: white;
+    }
+
+    .no {
+      background-color: red;
+      color: white;
+    }
+
+    .maybe {
+      background-color: gold;
+      color: black;
+    }
+
+    #videoContainer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,0.95);
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #alamkoo {
+      font-size: 40px;
+      font-weight: bold;
+      color: #ff3c3c;
+      margin-bottom: 20px;
+    }
+
+    iframe {
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="mainContent">
+    <img src="https://chat.openai.com/share/preview/e6b83261-c178-4cd2-8a35-85d91b0aa206/photo.jpg" alt="Funny Face" />
+    
+    <div class="buttons">
+      <button class="yes" onclick="showVideo()">YES</button>
+      <button class="no" onclick="hideMain()">NO</button>
+      <button class="maybe" onclick="hideMain()">MAYBE</button>
+    </div>
+  </div>
+
+  <div id="videoContainer">
+    <div id="alamkoo">ALAMKOOO!!!</div>
+    <iframe
+      width="80%"
+      height="400"
+      src="https://streamable.com/e/tqjww6?autoplay=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    function showVideo() {
+      document.getElementById("videoContainer").style.display = "flex";
+    }
+
+    function hideMain() {
+      document.getElementById("mainContent").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
