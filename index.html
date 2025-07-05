@@ -114,10 +114,11 @@
       margin-bottom: 20px;
     }
 
-    video {
+    iframe {
       width: 90%;
       max-width: 600px;
-      height: auto;
+      height: 360px;
+      border: none;
       border-radius: 15px;
     }
 
@@ -145,8 +146,8 @@
   <div id="mainContent">
     <div id="question">CRUSH MO BA'KO?</div>
 
-    <!-- ✅ New image -->
-    <img src="https://i.imgur.com/qkE7yt0.png">
+    <!-- ✅ New working image -->
+    <img src="https://i.imgur.com/VWv4p5H.jpeg">
 
     <div class="buttons">
       <button class="yes" onclick="showVideo()">YES</button>
@@ -161,11 +162,8 @@
   <div id="videoContainer">
     <div id="alamkoo">ALAMKOOO!!!</div>
 
-    <!-- ✅ Embedded working video from Catbox -->
-    <video controls autoplay>
-      <source src="https://files.catbox.moe/z6n0c4.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <!-- ✅ Streamable video embed -->
+    <iframe src="https://streamable.com/e/tqjww6" allow="autoplay" allowfullscreen></iframe>
   </div>
 
   <script>
@@ -186,7 +184,6 @@
       button.style.top = randY + "px";
     }
 
-    // 🏃 iwas effect
     document.addEventListener("DOMContentLoaded", () => {
       const noBtn = document.querySelector(".no");
       const maybeBtn = document.querySelector(".maybe");
