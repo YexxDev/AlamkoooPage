@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <title>CRUSH MO BA'KO?</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -16,52 +20,66 @@
       height: 100vh;
       flex-direction: column;
       text-align: center;
+      overflow: hidden;
+      position: relative;
     }
 
     #mainContent {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: 0.3s ease;
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     #question {
       font-size: 36px;
+      margin-top: 20px;
       margin-bottom: 20px;
-      color: black;
     }
 
     img {
-      width: 300px;
+      width: 250px;
       border-radius: 15px;
       margin-bottom: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .buttons {
+      position: relative;
+      height: 300px;
+      width: 100%;
     }
 
     .buttons button {
-      margin: 10px;
+      position: absolute;
       padding: 15px 30px;
       font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
-      transition: transform 0.2s ease;
+      transition: 0.2s ease;
     }
 
     .yes {
       background-color: green;
       color: white;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
     }
 
     .no {
       background-color: red;
       color: white;
+      top: 50px;
+      left: 20px;
     }
 
     .maybe {
       background-color: yellow;
       color: black;
+      top: 50px;
+      right: 20px;
     }
 
     #videoContainer {
@@ -92,16 +110,14 @@
       outline: none;
     }
 
-    .shake {
-      animation: shake 0.4s;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-10px); }
-      50% { transform: translateX(10px); }
-      75% { transform: translateX(-10px); }
-      100% { transform: translateX(0); }
+    /* 🔽 CTTO credit style */
+    #ctto {
+      position: absolute;
+      bottom: 10px;
+      font-size: 14px;
+      color: gray;
+      width: 100%;
+      text-align: center;
     }
   </style>
 </head>
@@ -110,22 +126,21 @@
   <div id="mainContent">
     <div id="question">CRUSH MO BA'KO?</div>
 
-    <!-- ✅ Replace this with your real image direct link -->
-    <img src="https://i.imgur.com/0WBXfbp.jpg" alt="Funny face">
+    <img src="https://i.imgur.com/0WBXfbp.jpg">
 
     <div class="buttons">
       <button class="yes" onclick="showVideo()">YES</button>
-      <button class="no" onclick="shake()">NO</button>
-      <button class="maybe" onclick="shake()">MAYBE</button>
+      <button class="no" onclick="moveRandom(this)">NO</button>
+      <button class="maybe" onclick="moveRandom(this)">MAYBE</button>
     </div>
+
+    <div id="ctto">ctto: YexelEsp</div>
   </div>
 
   <div id="videoContainer">
     <div id="alamkoo">ALAMKOOO!!!</div>
-
-    <!-- ✅ Replace this with your real .mp4 direct link -->
     <video autoplay controls>
-      <source src="https://files.catbox.moe/f5qj8o.mp4" type="video/mp4">
+      <source src="https://files.catbox.moe/z6n0c4.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -136,12 +151,16 @@
       document.getElementById("videoContainer").style.display = "flex";
     }
 
-    function shake() {
-      const main = document.getElementById("mainContent");
-      main.classList.add("shake");
-      setTimeout(() => {
-        main.classList.remove("shake");
-      }, 400);
+    function moveRandom(button) {
+      const parent = document.querySelector('.buttons');
+      const maxX = parent.offsetWidth - button.offsetWidth;
+      const maxY = parent.offsetHeight - button.offsetHeight;
+
+      const randX = Math.floor(Math.random() * maxX);
+      const randY = Math.floor(Math.random() * maxY);
+
+      button.style.left = randX + "px";
+      button.style.top = randY + "px";
     }
   </script>
 
