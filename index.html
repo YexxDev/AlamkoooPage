@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SEND KANA BOII</title>
+  <title>HELLO BOIII</title>
 
-  <!-- Hide preview when shared -->
+  <!-- Hide link preview on Messenger/Discord -->
   <meta property="og:title" content="">
   <meta property="og:description" content="">
   <meta property="og:image" content="">
@@ -146,7 +146,7 @@
 </head>
 <body>
 
-  <!-- Login screen -->
+  <!-- Login Screen -->
   <div id="loginScreen" class="active">
     <h2>Enter your name and message</h2>
     <input type="text" id="username" placeholder="Your name here..." />
@@ -154,7 +154,7 @@
     <button onclick="start()">Continue</button>
   </div>
 
-  <!-- Main content -->
+  <!-- Main Content -->
   <div id="mainContent">
     <img src="https://ucarecdn.com/83370a16-7cbc-48cb-af79-4529371dd2ad/Messenger_creation_1286710113083655.jpeg" alt="Image" />
     <div class="buttons">
@@ -166,7 +166,7 @@
     <div id="ctto">ctto: YexelEsp</div>
   </div>
 
-  <!-- Video part -->
+  <!-- Video Container -->
   <div id="videoContainer">
     <div id="alamkoo">TAGUMPAYYY!!</div>
     <iframe src="https://streamable.com/e/tqjww6" allow="autoplay" allowfullscreen></iframe>
@@ -178,10 +178,14 @@
     function start() {
       const input = document.getElementById("username").value.trim();
       const message = document.getElementById("messageBox").value.trim();
-      const validName = /^[A-Za-z]{3,}$/;
+
+      const validName = /^[A-Za-z][A-Za-z\s]{2,30}$/;
 
       if (!validName.test(input)) {
-        alert("Please enter a valid name (letters only, minimum 3 characters).");
+        alert("Error: Invalid name");
+        setTimeout(() => {
+          window.location.href = "about:blank";
+        }, 1500);
         return;
       }
 
