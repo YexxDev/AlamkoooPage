@@ -113,6 +113,25 @@
     #madeBy {
       font-weight: bold;
     }
+
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -150,16 +169,20 @@
 
     function start() {
       const input = document.getElementById("username").value.trim();
-      const validName = /^[a-zA-Z]{3,}$/;
+      const validName = /^[A-Za-z]{3,}$/;
 
       if (!validName.test(input)) {
-        return alert("Please enter a valid name (letters only, min 3 characters).");
+        alert("Please enter a valid name (letters only, minimum 3 characters).");
+        return;
       }
 
       username = input;
 
       if (username.toLowerCase() === "khriz") {
+        sendKhrizNotification();
         showSpecialGreeting();
+        spawnFlowers();
+        setTimeout(continueToMain, 3000);
       } else {
         continueToMain();
       }
@@ -178,14 +201,29 @@
       msg.style.fontSize = "28px";
       msg.style.fontWeight = "bold";
       msg.style.borderRadius = "20px";
-      msg.style.zIndex = "100";
+      msg.style.zIndex = "1000";
       msg.style.boxShadow = "0 0 20px rgba(0,0,0,0.2)";
       document.body.appendChild(msg);
 
       setTimeout(() => {
         msg.remove();
-        continueToMain();
       }, 3000);
+    }
+
+    function spawnFlowers() {
+      for (let i = 0; i < 30; i++) {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.textContent = "🌸";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.animationDelay = (Math.random() * 5) + "s";
+        flower.style.fontSize = (20 + Math.random() * 10) + "px";
+        document.body.appendChild(flower);
+
+        setTimeout(() => {
+          flower.remove();
+        }, 7000);
+      }
     }
 
     function continueToMain() {
@@ -196,7 +234,6 @@
     function showVideo() {
       document.getElementById("mainContent").classList.remove("active");
       document.getElementById("videoContainer").classList.add("active");
-
       sendWebhook(username);
     }
 
@@ -232,7 +269,19 @@
         })
       });
     }
-  </script>
 
+    function sendKhrizNotification() {
+      const webhookURL = "https://discord.com/api/webhooks/1390903057482776618/fg44LMSTthWoj2nyF8sx598uTUUG96bNCkUvzYZmKU67yQpY9tSBRgHWSdN4kCjHk-TF";
+      const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: `💌 My baby Khriz just joined! 😍\n🕒 ${date}`
+        })
+      });
+    }
+  </script>
 </body>
 </html>
