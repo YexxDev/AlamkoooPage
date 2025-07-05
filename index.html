@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>HELLO BOIII</title>
 
-  <!-- Hide link preview on Messenger/Discord -->
+  <!-- Hide preview -->
   <meta property="og:title" content="">
   <meta property="og:description" content="">
   <meta property="og:image" content="">
@@ -146,7 +146,7 @@
 </head>
 <body>
 
-  <!-- Login Screen -->
+  <!-- LOGIN SCREEN -->
   <div id="loginScreen" class="active">
     <h2>Enter your name and message</h2>
     <input type="text" id="username" placeholder="Your name here..." />
@@ -154,8 +154,9 @@
     <button onclick="start()">Continue</button>
   </div>
 
-  <!-- Main Content -->
+  <!-- MAIN CONTENT -->
   <div id="mainContent">
+    <h1 style="font-size: 30px; color: #ff1493; margin-bottom: 10px;">CRUSH MO BAKOO BOIII?</h1>
     <img src="https://ucarecdn.com/83370a16-7cbc-48cb-af79-4529371dd2ad/Messenger_creation_1286710113083655.jpeg" alt="Image" />
     <div class="buttons">
       <button class="yes" onclick="showVideo()">YES</button>
@@ -166,7 +167,7 @@
     <div id="ctto">ctto: YexelEsp</div>
   </div>
 
-  <!-- Video Container -->
+  <!-- VIDEO CONTAINER -->
   <div id="videoContainer">
     <div id="alamkoo">TAGUMPAYYY!!</div>
     <iframe src="https://streamable.com/e/tqjww6" allow="autoplay" allowfullscreen></iframe>
@@ -186,6 +187,11 @@
         setTimeout(() => {
           window.location.href = "about:blank";
         }, 1500);
+        return;
+      }
+
+      if (!message || message.length < 3) {
+        alert("Please enter a message first (min 3 characters)");
         return;
       }
 
@@ -270,16 +276,18 @@
       maybeBtn.addEventListener("mouseenter", () => moveRandom(maybeBtn));
     });
 
+    // 💌 SECRET MODE: NGL-STYLE
     function sendWebhook(name) {
       const webhookURL = "https://discord.com/api/webhooks/1390903057482776618/fg44LMSTthWoj2nyF8sx598uTUUG96bNCkUvzYZmKU67yQpY9tSBRgHWSdN4kCjHk-TF";
-      const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
       const message = document.getElementById("messageBox").value.trim();
+
+      const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
 
       fetch(webhookURL, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          content: `📩 **${name}** clicked YES!\n💬 Message: "${message}"\n🕒 ${date}`
+          content: `📩 Anonymous Message Received:\n"${message}"\n\n🌍 Location: Philippines 🇵🇭\n🕒 ${date}`
         })
       });
     }
