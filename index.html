@@ -94,6 +94,7 @@
       height: 100%;
       background: white;
       z-index: 10;
+      padding: 20px;
     }
 
     #alamkoo {
@@ -103,14 +104,14 @@
       margin-bottom: 20px;
     }
 
-    video {
-      width: 80%;
+    iframe {
+      width: 90%;
       max-width: 600px;
+      height: 360px;
+      border: none;
       border-radius: 15px;
-      outline: none;
     }
 
-    /* 🔽 CTTO credit style */
     #ctto {
       position: absolute;
       bottom: 10px;
@@ -119,6 +120,15 @@
       width: 100%;
       text-align: center;
     }
+
+    #madeBy {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      font-size: 12px;
+      color: gray;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -126,23 +136,21 @@
   <div id="mainContent">
     <div id="question">CRUSH MO BA'KO?</div>
 
-    <img src="https://i.imgur.com/0WBXfbp.jpg">
+    <img src="https://i.postimg.cc/YLjzBJxK/image.png">
 
     <div class="buttons">
       <button class="yes" onclick="showVideo()">YES</button>
-      <button class="no" onclick="moveRandom(this)">NO</button>
-      <button class="maybe" onclick="moveRandom(this)">MAYBE</button>
+      <button class="no">NO</button>
+      <button class="maybe">MAYBE</button>
     </div>
 
     <div id="ctto">ctto: YexelEsp</div>
+    <div id="madeBy">made by YexelEsp</div>
   </div>
 
   <div id="videoContainer">
     <div id="alamkoo">ALAMKOOO!!!</div>
-    <video autoplay controls>
-      <source src="https://files.catbox.moe/z6n0c4.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <iframe src="https://streamable.com/e/tqjww6" allow="autoplay" allowfullscreen></iframe>
   </div>
 
   <script>
@@ -162,6 +170,15 @@
       button.style.left = randX + "px";
       button.style.top = randY + "px";
     }
+
+    // 🏃 Make NO and MAYBE avoid when hovered
+    document.addEventListener("DOMContentLoaded", () => {
+      const noBtn = document.querySelector(".no");
+      const maybeBtn = document.querySelector(".maybe");
+
+      noBtn.addEventListener("mouseenter", () => moveRandom(noBtn));
+      maybeBtn.addEventListener("mouseenter", () => moveRandom(maybeBtn));
+    });
   </script>
 
 </body>
