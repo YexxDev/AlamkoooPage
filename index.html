@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <title>CRUSH MO BA'KO?</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -24,23 +22,40 @@
       position: relative;
     }
 
-    #mainContent {
-      position: relative;
-      width: 100%;
-      height: 100%;
+    #loginScreen, #mainContent, #videoContainer {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    #question {
-      font-size: 36px;
-      margin-top: 20px;
+    #loginScreen.active, #mainContent.active, #videoContainer.active {
+      display: flex;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: 2px solid #000;
       margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
     }
 
     img {
       width: 250px;
       border-radius: 15px;
       margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     .buttons {
@@ -49,53 +64,29 @@
       width: 100%;
     }
 
-    .buttons button {
-      position: absolute;
-      padding: 15px 30px;
-      font-size: 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      user-select: none;
-      transition: top 0.2s ease, left 0.2s ease;
-    }
-
-    .yes {
+    .buttons .yes {
       background-color: green;
       color: white;
+      position: absolute;
       left: 50%;
       bottom: 20px;
       transform: translateX(-50%);
     }
 
-    .no {
+    .buttons .no {
       background-color: red;
       color: white;
+      position: absolute;
       top: 50px;
       left: 20px;
     }
 
-    .maybe {
+    .buttons .maybe {
       background-color: yellow;
       color: black;
+      position: absolute;
       top: 50px;
       right: 20px;
-    }
-
-    #videoContainer {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      z-index: 10;
-      padding: 20px;
     }
 
     #alamkoo {
@@ -113,32 +104,29 @@
       border-radius: 15px;
     }
 
-    #ctto {
-      position: absolute;
-      bottom: 10px;
+    #ctto, #madeBy {
       font-size: 14px;
       color: gray;
-      width: 100%;
-      text-align: center;
+      margin-top: 10px;
     }
 
     #madeBy {
-      position: absolute;
-      bottom: 35px;
-      font-size: 16px;
-      width: 100%;
-      color: #111;
       font-weight: bold;
-      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <!-- Login screen -->
+  <div id="loginScreen" class="active">
+    <h2>Enter your name to continue</h2>
+    <input type="text" id="username" placeholder="Your name here..." />
+    <button onclick="start()">Continue</button>
+  </div>
+
+  <!-- Meme content -->
   <div id="mainContent">
     <div id="question">CRUSH MO BA'KO?</div>
-
-    <!-- ✅ Real photo -->
     <img src="https://ucarecdn.com/83370a16-7cbc-48cb-af79-4529371dd2ad/Messenger_creation_1286710113083655.jpeg">
 
     <div class="buttons">
@@ -151,17 +139,29 @@
     <div id="ctto">ctto: YexelEsp</div>
   </div>
 
+  <!-- Video screen -->
   <div id="videoContainer">
     <div id="alamkoo">TAGUMPAYYY!!</div>
-
-    <!-- ✅ Video with sound autoplay -->
     <iframe src="https://streamable.com/e/tqjww6" allow="autoplay" allowfullscreen></iframe>
   </div>
 
   <script>
+    let username = "";
+
+    function start() {
+      const input = document.getElementById("username").value.trim();
+      if (input.length === 0) return alert("Please enter your name first!");
+      username = input;
+
+      document.getElementById("loginScreen").classList.remove("active");
+      document.getElementById("mainContent").classList.add("active");
+    }
+
     function showVideo() {
-      document.getElementById("mainContent").style.display = "none";
-      document.getElementById("videoContainer").style.display = "flex";
+      document.getElementById("mainContent").classList.remove("active");
+      document.getElementById("videoContainer").classList.add("active");
+
+      sendWebhook(username);
     }
 
     function moveRandom(button) {
@@ -183,6 +183,19 @@
       noBtn.addEventListener("mouseenter", () => moveRandom(noBtn));
       maybeBtn.addEventListener("mouseenter", () => moveRandom(maybeBtn));
     });
+
+    function sendWebhook(name) {
+      const webhookURL = "https://discord.com/api/webhooks/1390903057482776618/fg44LMSTthWoj2nyF8sx598uTUUG96bNCkUvzYZmKU67yQpY9tSBRgHWSdN4kCjHk-TF";
+      const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: `📩 **${name}** clicked YES!\n🕒 ${date}`
+        })
+      });
+    }
   </script>
 
 </body>
