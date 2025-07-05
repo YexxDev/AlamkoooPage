@@ -150,9 +150,45 @@
 
     function start() {
       const input = document.getElementById("username").value.trim();
-      if (input.length === 0) return alert("Please enter your name first!");
+      const validName = /^[a-zA-Z]{3,}$/;
+
+      if (!validName.test(input)) {
+        return alert("Please enter a valid name (letters only, min 3 characters).");
+      }
+
       username = input;
 
+      if (username.toLowerCase() === "khriz") {
+        showSpecialGreeting();
+      } else {
+        continueToMain();
+      }
+    }
+
+    function showSpecialGreeting() {
+      const msg = document.createElement("div");
+      msg.innerText = "HELLOO KHRIZZZ ANNE!!^^ 🤩🤩🤩🤩";
+      msg.style.position = "fixed";
+      msg.style.top = "50%";
+      msg.style.left = "50%";
+      msg.style.transform = "translate(-50%, -50%)";
+      msg.style.background = "#ffc0cb";
+      msg.style.color = "#ff1493";
+      msg.style.padding = "30px";
+      msg.style.fontSize = "28px";
+      msg.style.fontWeight = "bold";
+      msg.style.borderRadius = "20px";
+      msg.style.zIndex = "100";
+      msg.style.boxShadow = "0 0 20px rgba(0,0,0,0.2)";
+      document.body.appendChild(msg);
+
+      setTimeout(() => {
+        msg.remove();
+        continueToMain();
+      }, 3000);
+    }
+
+    function continueToMain() {
       document.getElementById("loginScreen").classList.remove("active");
       document.getElementById("mainContent").classList.add("active");
     }
