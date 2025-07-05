@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CRUSH MO BA'KO?</title>
+  <title>SEND KANA BOII</title>
+
+  <!-- Hide preview when shared -->
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+
   <style>
     * { box-sizing: border-box; }
 
@@ -142,26 +150,23 @@
   <div id="loginScreen" class="active">
     <h2>Enter your name and message</h2>
     <input type="text" id="username" placeholder="Your name here..." />
-    <textarea id="messageBox" placeholder="Type your message..." rows="4"></textarea>
+    <textarea id="messageBox" placeholder="Send message if you want" rows="4"></textarea>
     <button onclick="start()">Continue</button>
   </div>
 
-  <!-- Meme content -->
+  <!-- Main content -->
   <div id="mainContent">
-    <div id="question">CRUSH MO BA'KO?</div>
-    <img src="https://ucarecdn.com/83370a16-7cbc-48cb-af79-4529371dd2ad/Messenger_creation_1286710113083655.jpeg">
-
+    <img src="https://ucarecdn.com/83370a16-7cbc-48cb-af79-4529371dd2ad/Messenger_creation_1286710113083655.jpeg" alt="Image" />
     <div class="buttons">
       <button class="yes" onclick="showVideo()">YES</button>
       <button class="no">NO</button>
       <button class="maybe">MAYBE</button>
     </div>
-
     <div id="madeBy">Made by YexelEsp</div>
     <div id="ctto">ctto: YexelEsp</div>
   </div>
 
-  <!-- Video screen -->
+  <!-- Video part -->
   <div id="videoContainer">
     <div id="alamkoo">TAGUMPAYYY!!</div>
     <iframe src="https://streamable.com/e/tqjww6" allow="autoplay" allowfullscreen></iframe>
@@ -177,11 +182,6 @@
 
       if (!validName.test(input)) {
         alert("Please enter a valid name (letters only, minimum 3 characters).");
-        return;
-      }
-
-      if (message.length < 1) {
-        alert("Please enter a message.");
         return;
       }
 
